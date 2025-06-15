@@ -16,6 +16,8 @@ A simple and user-friendly web application designed to showcase all the items av
 
 ---
 
+# Screenshots
+![Home Page](Screenshot 2025-06-015 204126.png)
 
 ---
 
