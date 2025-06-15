@@ -20,7 +20,7 @@ A simple and user-friendly web application designed to showcase all the items av
 ![Alt Text](Screenshot%202025-06-15%20204126.png)
 ![Cart View](Screenshot%202025-06-15%20204149.png)
 ![Checkout](Screenshot%202025-06-15%20204222.png)
-!(Screenshot%202025-06-15%20204325.png)
+![ve](Screenshot%202025-06-15%20204325.png)
 
 
 ---
