@@ -1,0 +1,387 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Hamara canteen</title>
+    <link rel="stylesheet" href="homestyle.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Popup window styling */
+        #cart-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        #cart-popup h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        #cart-popup ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #cart-popup .total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        #cart-popup button {
+            margin-top: 10px;
+        }
+        /* Overlay styling */
+        #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+    z-index: 999;
+}
+.total{
+    text-align: right;
+    padding-right: 12%;
+}
+/* Ensure the cart popup appears above the overlay */
+#cart-popup {
+    z-index: 1000;
+}
+
+
+        /* Cart Row Styling */
+.cart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+
+/* Header Row Styling */
+.header {
+    font-weight: bold;
+    border-bottom: 2px solid #333;
+   
+   }
+
+#cart-items .cart-row {
+    text-align: center;
+}
+/* Button Container Styling */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+    margin-top: 10px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #597445;
+    color: white;
+}
+
+.button-container button:hover {
+    background-color: #214220;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">CANTEEN</a>
+        <div class="menu-toggle"></div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#" id="cart-btn">Cart</a></li>
+                <li><a href="#">My orders</a></li>
+                <li><a href="#">Contact us</a></li>
+            </ul>
+        </nav>
+        <div class="clearfix"></div>
+    </header>
+
+    <!-- Cart Popup -->
+
+    <div id="cart-popup">
+      <h2>Your Cart</h2>
+      <hr>
+      <br>
+      <!-- Header Row for Titles -->
+      <div style="display: flex; justify-content: space-between; font-weight: bold;">
+          <span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspItem</span>
+          <span>Quantity</span>
+          <span>Price&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+      </div>
+      <ul id="cart-items"></ul>
+      <hr>
+      <p class="total">Total: ₹<span id="total-price">0</span></p>
+      
+      <div class="button-container">
+      <a href="payment.html"><button onclick="proceedToPayment()" >Proceed to Payment</button></a>
+      <button onclick="closeCart()">Close</button>
+  </div>
+</div>
+  <div id="overlay" onclick="closeCart()"></div>
+    
+
+    <section class="main">
+        <p class="first">നമ്മുടെ </p><p class="second">CANTEEN</p>
+    </section>
+    <br><br><br>
+    <p id="menu" class="listp">hot beverages </p>
+   
+    <!-- Menu Items -->
+    <div class="row">
+        <div class="column">
+          <img src="tea.jpg" style="width:100%">
+          <h1>ചായ</h1>
+          <p class="price">₹8</p>
+          <p><button onclick="addToCart('ചായ', 8)">Add to Cart</button></p>
+        </div>
+
+        <div class="column">
+          <img src="blacktea.jpg" style="width:100%">
+          <h1>സുലൈമാനി</h1>
+          <p class="price">₹7</p>
+          <p><button onclick="addToCart('സുലൈമാനി', 7)">Add to Cart</button></p>
+        </div>
+        <div class="column">
+          <img src="coffee.jpg"  style="width:100%">
+          <h1>കാപ്പി</h1>
+  <p class="price">₹12</p>
+  
+  <p><button onclick="addToCart('കാപ്പി', 12)">Add to Cart</button></p>
+        </div>
+
+        <div class="column">
+          <img src="milk.jpg"  style="width:100%">
+          <h1>പാൽ</h1>
+  <p class="price">₹10</p>
+ 
+  <p><button onclick="addToCart('പാൽ', 10)">Add to Cart</button></p>
+        </div>
+
+        <div class="column">
+          <img src="boost.jpg"  style="width:100%">
+          <h1>ബൂസ്റ്റ്</h1>
+  <p class="price">₹20</p>
+  
+  <p><button onclick="addToCart('ബൂസ്റ്റ്', 20)">Add to Cart</button></p>
+        </div>
+    </div>
+
+    <br><br>
+    <p class="listp">breakfast </p>
+ 
+  <div class="row">
+      
+      
+
+      <div class="column">
+        <img src="idli.jpg"  style="width:100%">
+        <h1>ഇഡ്ഡലി</h1>
+<p class="price">₹8</p>
+
+<p><button onclick="addToCart('ഇഡ്ഡലി', 8)">Add to Cart</button></p>
+      </div>
+
+      <div class="column">
+          <img src="puttu.jpg"  style="width:100%">
+          <h1>പുട്ട്</h1>
+  <p class="price">₹8</p>
+  
+  
+  <p><button onclick="addToCart('പുട്ട്', 8)">Add to Cart</button></p>
+        </div>
+
+        <div class="column">
+          <img src="vellappam.jpg" style="width:100%">
+          <h1>വെള്ളപ്പം</h1>
+  <p class="price">₹8</p>
+  
+  <p><button onclick="addToCart('വെള്ളപ്പം', 8)">Add to Cart</button></p>
+        </div>
+        <div class="column">
+          <img src="upma.jpg"  style="width:100%">
+          <h1>ഉപ്പുമാവ്</h1>
+  <p class="price">₹10</p>
+ 
+  <p><button onclick="addToCart('ഉപ്പുമാവ്', 10)">Add to Cart</button></p>
+        </div>
+
+        <div class="column">
+          <img src="idiyappam.jpg"  style="width:100%">
+          <h1>ഇടിയപ്പം</h1>
+  <p class="price">₹8</p>
+  
+  <p><button onclick="addToCart('ഇടിയപ്പം', 8)">Add to Cart</button></p>
+        </div>
+    </div>
+
+    <br><br>
+
+
+
+    <p class="listp">curries </p>
+ 
+  <div class="row">
+      
+      <div class="column">
+        <img src="sambar.jpg" style="width:100%">
+        <h1>സാമ്പാർ</h1>
+<p class="price">₹12</p>
+
+<p><button onclick="addToCart('സാമ്പാർ', 12)">Add to Cart</button></p>
+      </div>
+
+     
+
+      <div class="column">
+          <img src="cherrupayar.jpg"  style="width:100%">
+          <h1>ചെറുപയർ കറി</h1>
+  <p class="price">₹12</p>
+  
+  <p><button onclick="addToCart('ചെറുപയർ കറി', 12)">Add to Cart</button></p>
+        </div>
+
+        <div class="column">
+          <img src="chutney.jpg"  style="width:100%">
+          <h1>ചട്ണി</h1>
+  <p class="price">₹0</p>
+  
+  <p><button onclick="addToCart('ചട്ണി', 0)">Add to Cart</button></p>
+        </div>
+
+        <div class="column">
+          <img src="kadala.jpg"  style="width:100%">
+          <h1>കടല കറി</h1>
+  <p class="price">₹12</p>
+ 
+  <p><button onclick="addToCart('കടല കറി', 12)">Add to Cart</button></p>
+        </div>
+
+        <div class="column">
+          <img src="green.jpg"  style="width:100%">
+          <h1>ഗ്രീൻപീസ് കറി</h1>
+  <p class="price">₹12</p>
+  
+  <p><button onclick="addToCart('ഗ്രീൻപീസ് കറി', 12)">Add to Cart</button></p>
+        </div>
+
+        <!-- Add other menu items similarly... -->
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.menu-toggle').click(function(){
+                $('.menu-toggle').toggleClass('active');
+                $('nav').toggleClass('active');
+            });
+        });
+
+        let cart = [];
+
+        function addToCart(itemName, itemPrice) {
+    // Check if item already exists in the cart
+    let existingItem = cart.find(item => item.name === itemName);
+    
+    if (existingItem) {
+        // If it exists, increase the quantity
+        existingItem.quantity += 1;
+        existingItem.totalPrice = existingItem.quantity * itemPrice;
+    } else {
+        // If it doesn't exist, add a new item with quantity 1
+        cart.push({ name: itemName, price: itemPrice, quantity: 1, totalPrice: itemPrice });
+    }
+    alert(itemName + " added to cart!");
+}
+
+function openCart() {
+    let cartItems = document.getElementById("cart-items");
+    cartItems.innerHTML = "";
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        let cartRow = document.createElement("div");
+        cartRow.className = "cart-row";
+
+        // Item name
+        let itemName = document.createElement("span");
+        itemName.textContent = item.name;
+
+        // Item quantity
+        let itemQuantity = document.createElement("span");
+        itemQuantity.textContent = `x ${item.quantity}`;
+
+        // Total price for the item
+        let itemTotalPrice = document.createElement("span");
+        itemTotalPrice.textContent = `₹${item.totalPrice}`;
+
+        // Append to cart row
+        cartRow.appendChild(itemName);
+        cartRow.appendChild(itemQuantity);
+        cartRow.appendChild(itemTotalPrice);
+
+        // Append row to cart items
+        cartItems.appendChild(cartRow);
+        totalPrice += item.totalPrice;
+    });
+
+    document.getElementById("total-price").textContent = totalPrice;
+    document.getElementById("cart-popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block"; // Show the overlay
+}
+
+function closeCart() {
+    document.getElementById("cart-popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none"; // Hide the overlay
+}
+
+document.getElementById("cart-btn").addEventListener("click", openCart);
+
+function proceedToPayment() {
+    alert("Proceeding to payment!");
+    closeCart();
+    cart = []; // Clear the cart after proceeding to payment
+}
+    </script>
+     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+     <script type="text/javascript">
+         $(document).ready(function(){
+             $('.menu-toggle').click(function(){
+                 $('.menu-toggle').toggleClass('active')
+                 $('nav').toggleClass('active')
+             })
+         })
+     </script>
+</body>
+</html>

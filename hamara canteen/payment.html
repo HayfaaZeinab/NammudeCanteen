@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>UPI Payment Page</title>
+    <link rel="stylesheet" href="paymentstyle.css">
+    <style>
+        /* Background image and overlay styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("payment.jpg"); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Overlay to apply opacity to background */
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity here */
+            z-index: 1;
+        }
+
+        /* Payment container styling */
+        .payment-container {
+            position: relative;
+            z-index: 2; /* Ensures it appears above the overlay */
+            width: 400px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-container h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        /* Rest of the form styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .total-amount {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .btn-pay {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #597445;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-pay:hover {
+            background-color: #214220;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Background Overlay -->
+<div class="background-overlay"></div>
+
+<div class="payment-container">
+    <h2>UPI Payment</h2>
+
+    <!-- Total Amount Display 
+    /*<div class="total-amount">
+       Total: ₹<span id="total-amount">0</span>
+    </div>-->
+
+    <!-- UPI Payment Form -->
+    <form id="upi-payment-form" onsubmit="processUPIPayment(event)">
+        <div class="form-group">
+            <label for="upi-id">Enter UPI ID</label>
+            <input type="text" id="upi-id" name="upi-id" placeholder="example@bank" required>
+        </div>
+        
+        <button type="submit" class="btn-pay">Pay with UPI</button>
+    </form>
+</div>
+
+<script>
+    // Example function to set the total amount dynamically
+    //document.getElementById("total-amount").textContent = 120; // Example total amount
+
+    // Process UPI Payment Function (Mock)
+    function processUPIPayment(event) {
+        event.preventDefault();
+        
+        const upiID = document.getElementById("upi-id").value;
+
+        alert("Payment initiated via UPI ID: " + upiID);
+        window.location.href = "order-confirmation.html"; // Redirect to confirmation page after payment
+    }
+</script>
+
+</body>
+</html>
